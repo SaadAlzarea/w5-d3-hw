@@ -37,35 +37,48 @@ function displayPosts(posts) {
     const card = document.createElement("div");
     card.className = "card";
     const img = document.createElement("img");
-    img.src = item.imageUrl;
-    img.style.width = "150px";
+    img.src = item.imageUrl; 
+    img.style.width = "150px"; 
     const title = document.createElement("h4");
-    const commentUl = document.createElement("ul"); // here ul
-    title.innerText = item.text;
+    const commentUl = document.createElement("ul"); // here ul 
+    title.innerText = item.text; 
 
-    const commentLi = document.createElement("li"); // to display  comment and delete button
-    commentLi.style.display = "flex";
-    let comment = document.createElement("p"); // to print comment
-    comment.innerText = "test comment";
-    let deleteComment = document.createElement("button"); // to delete comment
-    deleteComment.innerText = "delete comment";
+    const commentLi = document.createElement("li"); // to display  comment and delete button 
+    commentLi.style.display = "flex"; 
+    let comment = document.createElement("p"); // to print comment 
+    comment.innerText = "test comment"; 
+    let deleteComment = document.createElement("button"); // to delete comment  
+    deleteComment.innerText = "delete comment"; 
 
-    commentLi.appendChild(comment);
-    commentLi.appendChild(deleteComment);
+    commentLi.appendChild(comment); 
+    commentLi.appendChild(deleteComment); 
 
-    let commentDivHeder = document.createElement("div"); // to display input to comment and add button
+    let commentDivHeder = document.createElement("div"); // to display input to comment and add button 
 
-    let commentInput = document.createElement("input"); // to write comment
-    let addComment = document.createElement("button"); // to add comment
-    addComment.innerText = "Add comment";
+    let commentInput = document.createElement("input"); // to write comment 
+    let addComment = document.createElement("button"); // to add comment 
+    addComment.innerText = "Add comment"; 
 
-    commentDivHeder.appendChild(commentInput);
-    commentDivHeder.appendChild(addComment);
+    commentDivHeder.appendChild(commentInput); 
+    commentDivHeder.appendChild(addComment); 
     card.appendChild(img);
     card.appendChild(title);
     commentUl.appendChild(commentLi);
     card.appendChild(commentUl);
-    card.appendChild(commentDivHeder);
+    card.appendChild(commentDivHeder); 
     container.appendChild(card);
   });
 }
+
+    addComment.addEventListener("click", async (e) => {
+      // post create post
+      const response = await fetch(`${apiUrl}/post/${item.id}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          comment: [commentInput.value],
+        }),
+      });
+    });
