@@ -9,7 +9,6 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-
     <title>Home page</title>
   </head>
   <body>
@@ -29,6 +28,7 @@
           <button onclick="logout()" id="logout-link" class="d-none">
             logOut
           </button>
+          <span id="username-display" class="mx-2"></span>
         </div>
       </div>
     </nav>
@@ -41,10 +41,11 @@
     <section id="posts-container"></section>
     <script src="main.js"></script>
     <script>
-      const u = localStorage.getItem("username");
-      //   to show added post ⇃⇃
-      //   const addPost = document.getElementById("add-post");
-      if (u) {
+      const currentUser = localStorage.getItem("username");
+      const usernameDisplay = document.getElementById("username-display");
+      
+      if (currentUser) {
+        usernameDisplay.textContent = `Welcome, ${currentUser}`;
         document.getElementById("logout-link").className =
           "d-flex btn btn-outline-danger";
         document.getElementById("add-post").className =
@@ -57,7 +58,7 @@
 
       function logout() {
         localStorage.removeItem("username");
-        window.location.reload();
+        window.location.href = "login.html";
       }
     </script>
   </body>
